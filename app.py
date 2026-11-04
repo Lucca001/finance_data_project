@@ -292,7 +292,10 @@ try:
     st.subheader("Distribuição da carteira")
     col_a, col_b = st.columns(2)
     with col_a:
-        st.dataframe(allocation[["ticker", "setor", "peso_pct", "valor_investido"]].sort_values("peso_pct", ascending=False), width="stretch")
+        st.dataframe(
+            allocation[["ticker", "setor", "peso_pct", "valor_investido"]].sort_values("peso_pct", ascending=False),
+            use_container_width=True,
+        )
     with col_b:
         st.bar_chart(allocation.set_index("ticker")["peso_pct"])
 
@@ -303,7 +306,7 @@ try:
         "volatilidade_diaria_pct": "Volatilidade diária %",
         "rsi_14": "RSI (14)",
     })
-    st.dataframe(comparison, width="stretch")
+    st.dataframe(comparison, use_container_width=True)
 
     st.subheader("Risco x retorno")
     scatter_data = summary[["ticker", "retorno_total_pct", "volatilidade_diaria_pct"]].set_index("ticker")
@@ -312,7 +315,7 @@ try:
     st.subheader("Setores da carteira")
     sector_chart = sector_summary.set_index("setor")[["peso_pct"]]
     st.bar_chart(sector_chart)
-    st.dataframe(sector_summary, width="stretch")
+    st.dataframe(sector_summary, use_container_width=True)
 
     st.subheader("Evolução do preço")
     price_chart = portfolio.pivot_table(index="date", columns="ticker", values="close", aggfunc="last").sort_index()
@@ -349,7 +352,10 @@ try:
     for ticker in summary["ticker"].tolist():
         group = portfolio[portfolio["ticker"] == ticker].sort_values("date")
         with st.expander(f"{ticker}"):
-            st.dataframe(group[["date", "open", "high", "low", "close", "volume", "sma_7", "sma_20", "rsi_14", "macd"]].tail(10), width="stretch")
+            st.dataframe(
+                group[["date", "open", "high", "low", "close", "volume", "sma_7", "sma_20", "rsi_14", "macd"]].tail(10),
+                use_container_width=True,
+            )
 
 except ValueError as exc:
     st.error(f"Erro ao carregar os dados: {exc}")

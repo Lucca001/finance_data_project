@@ -1,38 +1,58 @@
-# Análise Financeira Pessoal
+# Finance Data Project
 
-Esse projeto nasceu como uma forma simples de acompanhar o desempenho de uma ação e entender melhor o comportamento do mercado sem depender de ferramentas caras.
+Dashboard e análise de carteira focados em dados financeiros, risco, retorno e indicadores técnicos.
 
-A ideia aqui é ser um ambiente de estudo e acompanhamento pessoal, com foco em:
-- coleta de dados do mercado
-- cálculo de retornos e volatilidade
-- análise visual simples
-- acompanhamento de ativos da carteira
+## Visão geral
+Este projeto foi pensado como uma base sólida para acompanhar desempenho de ativos, comparar carteira, entender setor de exposição e validar ideias de análise quantitativa com dados reais do mercado.
 
-## Objetivo prático
-Usar a bolsa como laboratório de dados: observar tendências, comparar desempenho e aprender a transformar dados financeiros em indicadores úteis para tomada de decisão.
+### Funcionalidades principais
+- coleta de dados via yfinance
+- cálculo de retorno total, volatilidade e Sharpe
+- distribuição por pesos e valor investido
+- comparação por ativo e setor
+- indicadores técnicos: SMA, RSI e MACD
+- benchmark para contextualizar desempenho
+- interface em Streamlit com visualização profissional
 
 ## Estrutura do projeto
-- src/finance_analysis.py: script principal com coleta, indicadores e gráfico
-- requirements.txt: bibliotecas usadas
-- data/: pasta para salvar os gráficos gerados
+- app.py: dashboard principal da carteira
+- src/finance_analysis.py: script complementar para análise de ativos
+- tests/test_finance_analysis.py: testes de validação de entradas
+- requirements.txt: dependências do projeto
+- data/: pasta para artefatos e gráficos
+- .streamlit/config.toml: configurações do Streamlit para execução sem prompts extras
 
-## Como rodar
-1. Crie o ambiente virtual
-2. Instale as dependências
-3. Execute o script principal ou o dashboard
+## Requisitos
+- Python 3.10+
+- pip
 
-### Script de análise básica
+## Setup local
 ```bash
-python3 src/finance_analysis.py --ticker PETR4.SA --period 1y
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
 ```
 
-### Dashboard de carteira
+## Como executar
+### Dashboard
 ```bash
 streamlit run app.py
 ```
 
-## Ativo usado no exemplo
-O projeto usa PETR4.SA como referência inicial, mas o código pode ser adaptado para qualquer ativo da B3 ou do mercado internacional.
+### Script de análise básica
+```bash
+python src/finance_analysis.py --ticker AAPL --period 1y
+```
 
-## Observação
-Esse é um projeto pessoal de aprendizado, então a regra é manter o código simples, legível e fácil de evoluir conforme a análise vai ficando mais interessante.
+## Exemplos de uso
+- comparar carteira com 4 ações americanas
+- ajustar pesos na sidebar
+- testar benchmark SPY ou QQQ
+- trocar ativos e período conforme interesse
+
+## Observações
+O projeto é pensado para uso pessoal e aprendizado prático em finanças quantitativas, com foco em clareza, robustez e fácil expansão.
+
+## Licença
+Este projeto está licenciado sob a MIT License.
